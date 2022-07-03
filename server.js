@@ -3,7 +3,7 @@ const inquirer = require("inquirer");
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: 3001,
+    port: 3306,
 
     user: "root",
 
@@ -184,6 +184,42 @@ function addRole() {
 
 }
 
+function employee() {
+    inquirer
+        .prompt([{
+            name: "firstName",
+            type: "input",
+            message: "What is the Employee's first name?"
+        }, {
+            name: "lastName",
+            type: "input",
+            message: "What is the Employee's last name?"
+        }])
+        .then(function(answer) {
+            var query = "SELECT * FROM employee WHERE (first_name = ?) AND (last_name = ?)";
+            connection.query(query, [answer.firstName, answer.lastName], function(err, res) {
+                if (err) throw err;
+                console.table(res);
+            });
+            init();
+        })
+}
 
+function employeeManager() {
+    inquirer
+        .prompt({
+            name: "filterManager",
+            type: "input",
+            message: "Filter by Manager ID:"
+        })
+        .then(function(answer) {
+            var query = "SELECT * FROM employee WHERE manager_id =?";
+            connection.query(query, [parseInt(answer.filterManager)], function(err, res) {
+                if (err) throw err;
+                console.table(res);
+            });
+            init();
+        })
+}
 
 init()
