@@ -62,18 +62,6 @@ function init() {
                     employeeManager();
                     break;
 
-                case "Remove a Employee":
-                    deleteEmployee();
-                    break;
-
-                case "Remove a Department":
-                    deleteDept();
-                    break;
-
-                case "Remove a Role":
-                    deleteRole();
-                    break;
-
                 case "Add a Employee":
                     addEmployee();
                     break;
@@ -86,20 +74,42 @@ function init() {
                     addRole();
                     break;
 
-
-                case "Update Employee Role":
-                    updateRole();
-                    break;
-
-                case "Update Employee Manager":
-                    updateManager();
-                    break;
-
                 case "exit":
                     connection.end();
                     break;
             }
         });
 }
+
+
+function employeeAll() {
+    var query = "SELECT * FROM employee";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+
+    });
+    init();
+}
+
+function deptsAll() {
+    var query = "SELECT * FROM department";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+    });
+    init();
+}
+
+function rolesAll() {
+    var query = "SELECT * FROM employee_role";
+    connection.query(query, function(err, res) {
+        if (err) throw err;
+        console.table(res);
+    });
+    init();
+}
+
+
 
 init()
