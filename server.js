@@ -110,6 +110,80 @@ function rolesAll() {
     init();
 }
 
+function addEmployee() {
+    inquirer
+        .prompt([{
+            name: "firstName",
+            type: "input",
+            message: "What is the employee's first name?"
+        }, {
+            name: "lastName",
+            type: "input",
+            message: "What is the employee's last name?"
+        }, {
+            name: "role_id",
+            type: "input",
+            message: "What is the employee's role id?"
+        }, {
+            name: "manager_id",
+            type: "input",
+            message: "What is your manager's id?",
+
+        }, ])
+        .then(function(answer) {
+            let query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)"
+            connection.query(query, [answer.firstName, answer.lastName, parseInt(answer.role_id), parseInt(answer.manager_id)], function(err, res) {
+                if (err) throw err;
+                console.log(res);
+            })
+            init();
+        })
+}
+
+function addDept() {
+    inquirer
+        .prompt({
+            name: "dept_name",
+            type: "input",
+            message: "What is the name of the department you want to add?"
+        }, )
+        .then(function(answer) {
+            let query = "INSERT INTO department (dept_name) VALUES (?)";
+            connection.query(query, [answer.dept_name], function(err, res) {
+                if (err) throw err;
+                console.table(res);
+            })
+            init();
+        })
+
+}
+
+function addRole() {
+    inquirer
+        .prompt([{
+            name: "title",
+            type: "input",
+            message: "What is the name of the new role title?"
+        }, {
+            name: "salary",
+            type: "input",
+            message: "What is the yearly salary of this role?"
+        }, {
+            name: "dept_name",
+            type: "input",
+            message: "What department is this new role under?"
+        }])
+        .then(function(answer) {
+            let query = "INSERT INTO employee_role (title, salary, dept_name) VALUES (?,?,?)";
+            connection.query(query, [answer.title, answer.salary, answer.dept_name], function(err, res) {
+                if (err) throw err;
+                console.table(res);
+            })
+            init();
+        })
+
+}
+
 
 
 init()
