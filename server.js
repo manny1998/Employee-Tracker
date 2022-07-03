@@ -34,20 +34,13 @@ function init() {
                 "View All of the Roles", 
                 "Search for an Employee", 
                 "Search for Employees by Manager", 
-                "Remove a Employee",
-                "Remove a Department", 
-                "Remove a Role", 
                 "Add a Employee", 
                 "Add a Department", 
                 "Add a Role", 
-                "Update Employee Role", 
-                "Update Employee Manager", 
-                "Calculate Payroll", 
                 "exit" 
             ]
         })
         .then(function(answer) {
-            // console.log("hey!")
             switch (answer.action) {
                 case "View All of the Employees":
                     employeeAll();
