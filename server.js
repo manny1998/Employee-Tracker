@@ -7,8 +7,8 @@ const connection = mysql.createConnection({
 
     user: "root",
 
-
-    password: "Mundi-1998",
+//removed password so wont work until user puts there own password in.
+    password: "",
     database: "employees"
 });
 
